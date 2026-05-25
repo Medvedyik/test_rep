@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drupal-coder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+
+  <script type="module" crossorigin src="/project/assets/index-B3yBhv5u.js"></script>
+  <link rel="stylesheet" crossorigin href="/project/assets/index-Bj3ZyV7G.css">
+</head>
+
+<body>
+  <div class="page">
+
+<header class="header">
+  <!-- Фоновое видео -->
+  <video class="header__video" autoplay muted loop playsinline preload="metadata">
+    <source src="/project/video/video.mp4" type="video/mp4">
+  </video>
+
+  <!-- Темный оверлей поверх видео -->
+  <div class="header__overlay" aria-hidden="true"></div>
+
+  <img src="/project/images/header/drupalicon.svg" alt="" class="header__decor" aria-hidden="true">
+
+  <div class="container">
+    <!-- Навигация -->
+    <nav class="header__nav" aria-label="Главная навигация">
+      <!-- Логотип -->
+      <a href="/" class="header__logo">
+        <img src="/project/images/header/drupal-coder.svg" alt="Drupal-coder" class="header__logo-image">
+      </a>
+
+      <!-- Десктопное меню -->
+      <ul class="header__menu">
+        <li class="header__menu-item">
+          <a href="#" class="header__menu-link header__menu-link--active">ПОДДЕРЖКА САЙТОВ</a>
+        </li>
+        
+        <li class="header__menu-item header__menu-item--dropdown">
+          <a href="#" class="header__menu-link">
+            АДМИНИСТРИРОВАНИЕ
+            <span class="header__menu-arrow" aria-hidden="true">▾</span>
+          </a>
+          <ul class="header__dropdown" aria-label="Подменю администрирования">
+            <li><a href="#services" class="header__dropdown-link">МИГРАЦИЯ</a></li>
+            <li><a href="#support" class="header__dropdown-link">БЭКАПЫ</a></li>
+            <li><a href="#plans" class="header__dropdown-link">АУДИТ БЕЗОПАСНОСТИ</a></li>
+            <li><a href="#cases" class="header__dropdown-link">ОПТИМИЗАЦИЯ СКОРОСТИ</a></li>
+            <li><a href="#team" class="header__dropdown-link">ПЕРЕЕЗД НА HTTPS</a></li>
+          </ul>
+        </li>
+
+        <li class="header__menu-item">
+          <a href="#" class="header__menu-link">ТАРИФЫ</a>
+        </li>
+        
+        <li class="header__menu-item">
+          <a href="#" class="header__menu-link">НАШИ РАБОТЫ</a>
+        </li>
+        
+        <li class="header__menu-item header__menu-item--dropdown">
+          <a href="#" class="header__menu-link">
+            О НАС
+            <span class="header__menu-arrow" aria-hidden="true">▾</span>
+          </a>
+          <ul class="header__dropdown" aria-label="Подменю о нас">
+            <li><a href="#" class="header__dropdown-link">КОМАНДА</a></li>
+            <li><a href="#" class="header__dropdown-link">DRUPALGIVE</a></li>
+            <li><a href="#" class="header__dropdown-link">БЛОГ</a></li>
+            <li><a href="#" class="header__dropdown-link">КУРСЫ DRUPAL</a></li>
+          </ul>
+        </li>
+
+        <li class="header__menu-item">
+          <a href="#" class="header__menu-link">ОТЗЫВЫ</a>
+        </li>
+        
+        <li class="header__menu-item">
+          <a href="#" class="header__menu-link">КОНТАКТЫ</a>
+        </li>
+        <li class="header__mobile-contacts">
+          <a href="tel:88002222673" class="header__phone">8 800 222-26-73</a>
+          <button class="header__lang" aria-label="Выбор языка">
+            RU <span class="header__lang-arrow" aria-hidden="true">▾</span>
+          </button>
+        </li>
+      </ul>
+
+      <!-- Контакты и языковой переключатель -->
+      <div class="header__contacts">
+        <a href="tel:88002222673" class="header__phone">8 800 222-26-73</a>
+        <button class="header__lang" aria-label="Выбор языка">
+          RU <span class="header__lang-arrow" aria-hidden="true">▾</span>
+        </button>
+      </div>
+
+      <!-- Мобильное меню -->
+      <button class="header__burger" aria-label="Открыть меню" aria-expanded="false">
+        <span class="header__burger-line"></span>
+        <span class="header__burger-line"></span>
+        <span class="header__burger-line"></span>
+      </button>
+    </nav>
+
+    <!-- Hero секция -->
+    <div class="header__hero">
+      <!-- Контент -->
+      <div class="header__content">
+        <h1 class="header__title">
+          Поддержка<br>
+          сайтов на Drupal
+        </h1>
+
+        <p class="header__text">
+          Сопровождение и поддержка сайтов<br>
+          на CMS Drupal любых версий и запущенности
+        </p>
+
+        <a href="#plans" class="header__button">ТАРИФЫ</a>
+      </div>
+
+      <!-- Статистика -->
+      <div class="header__stats">
+        <div class="header__stat">
+          <div class="header__stat-value">
+            #1
+            <img src="/project/images/header/cup.png" alt="" class="header__stat-icon" aria-hidden="true">
+          </div>
+          <div class="header__stat-text">
+            Drupal-разработчик<br>
+            в России по версии<br>
+            Рейтинга Рунета
+          </div>
+        </div>
+
+        <div class="header__stat">
+          <div class="header__stat-value">3+</div>
+          <div class="header__stat-text">
+            средний опыт<br>
+            специалистов более<br>
+            3 лет
+          </div>
+        </div>
+
+        <div class="header__stat">
+          <div class="header__stat-value">14</div>
+          <div class="header__stat-text">
+            лет опета в сфере<br>
+            Drupal
+          </div>
+        </div>
+
+        <div class="header__stat">
+          <div class="header__stat-value">200+</div>
+          <div class="header__stat-text">
+            модулей и тем<br>
+            в формате DrupalGive
+          </div>
+        </div>
+
+        <div class="header__stat">
+          <div class="header__stat-value">35 000</div>
+          <div class="header__stat-text">
+            часов поддержки<br>
+            сайтов на Drupal
+          </div>
+        </div>
+
+        <div class="header__stat">
+          <div class="header__stat-value">200+</div>
+          <div class="header__stat-text">
+            проектов<br>
+            на поддержке
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="services" id="services">
+  <div class="container">
+    <!-- Заголовок секции -->
+    <header class="services__header">
+      <h2 class="services__title">
+        13 лет совершенствуем компетенции в Drupal поддержке!
+      </h2>
+      <p class="services__subtitle">
+        Разрабатываем и оптимизируем модули, расширяем функциональность сайтов, обновляем дизайн
+      </p>
+    </header>
+
+    <!-- Сетка карточек услуг -->
+    <div class="services__grid" role="list" aria-label="Список услуг">
+      <!-- Карточка 1: Добавление информации -->
+      <article class="service-card" role="listitem">
+        <div class="service-card__icon">
+          <img src="/project/images/services/competency-1.svg" alt="" aria-hidden="true">
+        </div>
+        <h3 class="service-card__title">
+          Добавление информации на сайт, создание новых разделов
+        </h3>
+      </article>
+
+      <!-- Карточка 2: Разработка модулей -->
+      <article class="service-card" role="listitem">
+        <div class="service-card__icon">
+          <img src="/project/images/services/competency-2.svg" alt="" aria-hidden="true">
+        </div>
+        <h3 class="service-card__title">
+          Разработка и оптимизация модулей сайта
+        </h3>
+      </article>
+
+      <!-- Карточка 3: Интеграция -->
+      <article class="service-card" role="listitem">
+        <div class="service-card__icon">
+          <img src="/project/images/services/competency-3.svg" alt="" aria-hidden="true">
+        </div>
+        <h3 class="service-card__title">
+          Интеграция с CRM, 1C, платежными системами, любыми веб-сервисами
+        </h3>
+      </article>
+
+      <!-- Карточка 4: Доработки -->
+      <article class="service-card" role="listitem">
+        <div class="service-card__icon">
+          <img src="/project/images/services/competency-4.svg" alt="" aria-hidden="true">
+        </div>
+        <h3 class="service-card__title">
+          Любые доработки функционала и дизайна
+        </h3>
+      </article>
+
+      <!-- Карточка 5: Аудит безопасности -->
+      <article class="service-card" role="listitem">
+        <div class="service-card__icon">
+          <img src="/project/images/services/competency-5.svg" alt="" aria-hidden="true">
+        </div>
+        <h3 class="service-card__title">
+          Аудит и мониторинг безопасности Drupal сайтов
+        </h3>
+      </article>
+
+      <!-- Карточка 6: Миграция -->
+      <article class="service-card" role="listitem">
+        <div class="service-card__icon">
+          <img src="/project/images/services/competency-6.svg" alt="" aria-hidden="true">
+        </div>
+        <h3 class="service-card__title">
+          Миграция, импорт контента и апгрейд Drupal
+        </h3>
+      </article>
+
+      <!-- Карточка 7: Оптимизация -->
+      <article class="service-card" role="listitem">
+        <div class="service-card__icon">
+          <img src="/project/images/services/competency-7.svg" alt="" aria-hidden="true">
+        </div>
+        <h3 class="service-card__title">
+          Оптимизация и ускорение Drupal сайтов
+        </h3>
+      </article>
+
+      <!-- Карточка 8: Веб-маркетинг -->
+      <article class="service-card" role="listitem">
+        <div class="service-card__icon">
+          <img src="/project/images/services/competency-8.svg" alt="" aria-hidden="true">
+        </div>
+        <h3 class="service-card__title">
+          Веб-маркетинг, консультации и работы по SEO
+        </h3>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="support section" id="support" aria-labelledby="support-title">
+  <div class="container">
+    <!-- Заголовок секции -->
+    <header class="support__header">
+      <h2 id="support-title" class="support__title">Поддержка от Drupal-coder</h2>
+    </header>
+
+    <!-- Сетка карточек -->
+    <div class="support__grid" role="list" aria-label="Преимущества поддержки">
+      <!-- Карточка 1 -->
+      <article class="support-card" role="listitem">
+        <span class="support-card__number">01.</span>
+        <h3 class="support-card__title">Постановка задачи по Email</h3>
+        <p class="support-card__text">
+          Удобная и привычная модель постановки задач, при которой задачи фиксируются и никогда не теряются.
+        </p>
+        <img 
+          src="/project/images/support/support1.svg" 
+          alt="" 
+          class="support-card__decor" 
+          aria-hidden="true"
+        />
+      </article>
+
+      <!-- Карточка 2 -->
+      <article class="support-card" role="listitem">
+        <span class="support-card__number">02.</span>
+        <h3 class="support-card__title">Система Helpdesk – отчетность, прозрачность</h3>
+        <p class="support-card__text">
+          Возможность посмотреть все заявки в работе и отработанные часы в личном кабинете через браузер.
+        </p>
+        <img 
+          src="/project/images/support/support2.svg" 
+          alt="" 
+          class="support-card__decor" 
+          aria-hidden="true"
+        />
+      </article>
+
+      <!-- Карточка 3 -->
+      <article class="support-card" role="listitem">
+        <span class="support-card__number">03.</span>
+        <h3 class="support-card__title">Расширенная техническая поддержка</h3>
+        <p class="support-card__text">
+          Возможность организации расширенной техподдержки с 6:00 до 22:00 без выходных.
+        </p>
+        <img 
+          src="/project/images/support/support3.svg" 
+          alt="" 
+          class="support-card__decor" 
+          aria-hidden="true"
+        />
+      </article>
+
+      <!-- Карточка 4 -->
+      <article class="support-card" role="listitem">
+        <span class="support-card__number">04.</span>
+        <h3 class="support-card__title">Персональный менеджер проекта</h3>
+        <p class="support-card__text">
+          Ваш менеджер проекта всегда в курсе текущего состояния проекта и в любой момент готов ответить на любые вопросы.
+        </p>
+        <img 
+          src="/project/images/support/support4.svg" 
+          alt="" 
+          class="support-card__decor" 
+          aria-hidden="true"
+        />
+      </article>
+
+      <!-- Карточка 5 -->
+      <article class="support-card" role="listitem">
+        <span class="support-card__number">05.</span>
+        <h3 class="support-card__title">Удобные способы оплаты</h3>
+        <p class="support-card__text">
+          Безналичный расчет по договору или электронные деньги: WebMoney, Яндекс.Деньги, Paypal.
+        </p>
+        <img 
+          src="/project/images/support/support5.svg" 
+          alt="" 
+          class="support-card__decor" 
+          aria-hidden="true"
+        />
+      </article>
+
+      <!-- Карточка 6 -->
+      <article class="support-card" role="listitem">
+        <span class="support-card__number">06.</span>
+        <h3 class="support-card__title">Работаем с SLA и NDA</h3>
+        <p class="support-card__text">
+          Работа в рамках соглашений о конфиденциальности и об уровне качества работ.
+        </p>
+        <img 
+          src="/project/images/support/support6.svg" 
+          alt="" 
+          class="support-card__decor" 
+          aria-hidden="true"
+        />
+      </article>
+
+      <!-- Карточка 7 -->
+      <article class="support-card" role="listitem">
+        <span class="support-card__number">07.</span>
+        <h3 class="support-card__title">Штатные специалисты</h3>
+        <p class="support-card__text">
+          Надежные штатные специалисты, никаких фрилансеров.
+        </p>
+        <img 
+          src="/project/images/support/support7.svg" 
+          alt="" 
+          class="support-card__decor" 
+          aria-hidden="true"
+        />
+      </article>
+
+      <!-- Карточка 8 -->
+      <article class="support-card" role="listitem">
+        <span class="support-card__number">08.</span>
+        <h3 class="support-card__title">Удобные каналы связи</h3>
+        <p class="support-card__text">
+          Консультации по телефону, скайпу, в мессенджерах.
+        </p>
+        <img 
+          src="/project/images/support/support8.svg" 
+          alt="" 
+          class="support-card__decor" 
+          aria-hidden="true"
+        />
+      </article>
+    </div>
+  </div>
+
+  <!-- Тёмная часть с преимуществами -->
+  <div class="support__dark">
+    <!-- Декоративные элементы -->
+    <img 
+      src="/project/images/support/laptop.png" 
+      alt="" 
+      class="support__decor-laptop" 
+      aria-hidden="true"
+    />
+    <img 
+      src="/project/images/support/drupalicon.svg" 
+      alt="" 
+      class="support__decor-drupal" 
+      aria-hidden="true"
+    />
+    
+    <div class="container">
+      <div class="support__dark-content">
+        <!-- Левая колонка для выравнивания на десктопе -->
+        <div class="support__grid-spacer" aria-hidden="true"></div>
+        
+        <!-- Правая колонка с текстом -->
+        <div class="support__info">
+          <h2 class="support__bottom-title">
+            Экспертиза в Drupal,<br />
+            опыт 14 лет!
+          </h2>
+
+          <ul class="support__list">
+            <li class="support__item">
+              Только системный подход — контроль версий,
+              резервирование и тестирование
+            </li>
+            <li class="support__item">
+              Только Drupal сайты, не берём на поддержку сайты
+              на других CMS
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="plans section" id="plans">
+  <div class="container">
+    <!-- Заголовок секции -->
+    <div class="plans__header">
+      <h2 class="plans__title">Тарифы</h2>
+    </div>
+
+    <!-- Сетка карточек -->
+    <div class="plans__grid">
+      <!-- Карточка 1: Стартовый -->
+      <article class="plan-card">
+        <h3 class="plan-card__title">Стартовый</h3>
+        <div class="plan-card__price">
+          <span class="plan-card__amount">2000</span>
+          <span class="plan-card__currency">₽</span>
+        </div>
+        <p class="plan-card__period">в час</p>
+
+        <div class="plan-card__divider"></div>
+
+        <ul class="plan-card__features">
+          <li class="plan-card__feature">Предоплата от 2 часов</li>
+          <li class="plan-card__feature">Консультации и работы по SEO</li>
+          <li class="plan-card__feature">Услуги дизайнера</li>
+          <li class="plan-card__feature">Стандартное время реакции</li>
+          <li class="plan-card__feature">Неиспользованные оплаченные часы переносятся на следующий месяц</li>
+        </ul>
+
+        <button class="plan-card__button">Оставить заявку!</button>
+      </article>
+
+      <!-- Карточка 2: Бизнес -->
+      <article class="plan-card">
+        <h3 class="plan-card__title">Бизнес</h3>
+        <div class="plan-card__price">
+          <span class="plan-card__amount">2000</span>
+          <span class="plan-card__currency">₽</span>
+        </div>
+        <p class="plan-card__period">в час</p>
+
+        <div class="plan-card__divider"></div>
+
+        <ul class="plan-card__features">
+          <li class="plan-card__feature">Предоплата от 10 часов</li>
+          <li class="plan-card__feature">Консультации и работы по SEO</li>
+          <li class="plan-card__feature">Услуги дизайнера</li>
+          <li class="plan-card__feature">Высокое время реакции – до 2 рабочих дней</li>
+          <li class="plan-card__feature">Неиспользованные часы не переносятся</li>
+        </ul>
+
+        <button class="plan-card__button">Оставить заявку!</button>
+      </article>
+
+      <!-- Карточка 3: VIP -->
+      <article class="plan-card">
+        <h3 class="plan-card__title">VIP</h3>
+        <div class="plan-card__price">
+          <span class="plan-card__amount">1800</span>
+          <span class="plan-card__currency">₽</span>
+        </div>
+        <p class="plan-card__period">в час</p>
+
+        <div class="plan-card__divider"></div>
+
+        <ul class="plan-card__features">
+          <li class="plan-card__feature">Предоплата от 100 часов</li>
+          <li class="plan-card__feature">Консультации и работы по SEO</li>
+          <li class="plan-card__feature">Услуги дизайнера</li>
+          <li class="plan-card__feature">Максимальное время реакции – в день обращения</li>
+          <li class="plan-card__feature">Неиспользованные часы не переносятся</li>
+        </ul>
+
+        <button class="plan-card__button">Оставить заявку!</button>
+      </article>
+    </div>
+
+    <!-- Футер блока -->
+    <div class="plans__footer">
+      <p class="plans__footer-text">
+        Вам не подходят наши тарифы? Оставьте заявку и мы предложим вам индивидуальные условия!
+      </p>
+      <a href="#" class="plans__footer-link">Получить индивидуальный тариф</a>
+    </div>
+  </div>
+
+  <!-- Декоративная графика -->
+  <img src="/project/images/plans/drupal-graphic.svg" alt="" class="plans__decor" />
+</section>
+
+<section class="cases section" id="cases">
+  <div class="container">
+    <!-- Заголовок секции -->
+    <div class="cases__header">
+      <h2 class="cases__title">Последние кейсы</h2>
+    </div>
+
+    <!-- Сетка карточек -->
+    <div class="cases__grid">
+      <!-- Карточка 1 -->
+      <article class="case-card case-card--below">
+        <div class="case-card__image">
+          <img src="/project/images/cases/image1.png" alt="Настройка выгрузки YML для Яндекс.Маркета">
+        </div>
+        <div class="case-card__content">
+          <h3 class="case-card__title">Настройка выгрузки YML для Яндекс.Маркета</h3>
+          <time class="case-card__date">22.04.2019</time>
+          <p class="case-card__excerpt">
+            Эти слова совершенно справедливы, однако гипнотический рифф продолжает паузный пласт.
+          </p>
+        </div>
+      </article>
+
+      <!-- Карточка 2 -->
+      <article class="case-card case-card--overlay">
+        <div class="case-card__image">
+          <img src="/project/images/cases/image2.png" alt="Настройка выгрузки YML для Яндекс.Маркета">
+        </div>
+        <div class="case-card__content">
+          <h3 class="case-card__title">Настройка выгрузки YML для Яндекс.Маркета</h3>
+        </div>
+      </article>
+
+      <!-- Карточка 3 -->
+      <article class="case-card case-card--overlay">
+        <div class="case-card__image">
+          <img src="/project/images/cases/image3.png" alt="Настройка выгрузки YML для Яндекс.Маркета">
+        </div>
+        <div class="case-card__content">
+          <h3 class="case-card__title">Настройка выгрузки YML для Яндекс.Маркета</h3>
+          <time class="case-card__date">22.04.2019</time>
+        </div>
+      </article>
+
+      <!-- Карточка 4 -->
+      <article class="case-card case-card--overlay">
+        <div class="case-card__image">
+          <img src="/project/images/cases/image4.png" alt="Настройка выгрузки YML для Яндекс.Маркета">
+        </div>
+        <div class="case-card__content">
+          <h3 class="case-card__title">Настройка выгрузки YML для Яндекс.Маркета</h3>
+          <time class="case-card__date">22.04.2019</time>
+        </div>
+      </article>
+
+      <!-- Карточка 5 -->
+      <article class="case-card case-card--below">
+        <div class="case-card__image">
+          <img src="/project/images/cases/image5.png" alt="Настройка выгрузки YML для Яндекс.Маркета">
+        </div>
+        <div class="case-card__content">
+          <h3 class="case-card__title">Настройка выгрузки YML для Яндекс.Маркета</h3>
+          <time class="case-card__date">22.04.2019</time>
+          <p class="case-card__excerpt">
+            Эти слова совершенно справедливы, однако гипнотический рифф продолжает паузный пласт.
+          </p>
+        </div>
+      </article>
+
+      <!-- Карточка 6 -->
+      <article class="case-card case-card--overlay">
+        <div class="case-card__image">
+          <img src="/project/images/cases/image6.png" alt="Настройка выгрузки YML для Яндекс.Маркета">
+        </div>
+        <div class="case-card__content">
+          <h3 class="case-card__title">Настройка выгрузки YML для Яндекс.Маркета</h3>
+          <time class="case-card__date">22.04.2019</time>
+        </div>
+      </article>
+
+      <!-- Карточка 7 -->
+      <article class="case-card case-card--overlay">
+        <div class="case-card__image">
+          <img src="/project/images/cases/image7.png" alt="Настройка выгрузки YML для Яндекс.Маркета">
+        </div>
+        <div class="case-card__content">
+          <h3 class="case-card__title">Настройка выгрузки YML для Яндекс.Маркета</h3>
+          <time class="case-card__date">22.04.2019</time>
+        </div>
+      </article>
+    </div>
+
+    <!-- Кнопка "Показать ещё" -->
+    <div class="cases__more">
+      <a href="#" class="cases__more-button">Показать ещё</a>
+    </div>
+  </div>
+</section>
+
+<section class="team section" id="team">
+  <div class="container">
+    <!-- Заголовок секции -->
+    <div class="team__header">
+      <h2 class="team__title">Команда</h2>
+    </div>
+
+    <!-- Сетка команды -->
+    <div class="team__grid">
+      <!-- Карточка 1 -->
+      <div class="team__member">
+        <div class="team__photo">
+          <img src="/project/images/team/team1.jpg" alt="" loading="lazy">
+        </div>
+        <div class="team__info">
+          <h3 class="team__name">Сергей Синица</h3>
+          <p class="team__role">Руководитель отдела веб-разработки, канд. техн. наук, заместитель директора</p>
+        </div>
+      </div>
+
+      <!-- Карточка 2 -->
+      <div class="team__member">
+        <div class="team__photo">
+          <img src="/project/images/team/team2.jpg" alt="" loading="lazy">
+        </div>
+        <div class="team__info">
+          <h3 class="team__name">Роман Агабеков</h3>
+          <p class="team__role">Руководитель отдела DevOPS, директор</p>
+        </div>
+      </div>
+
+      <!-- Карточка 3 -->
+      <div class="team__member">
+        <div class="team__photo">
+          <img src="/project/images/team/team3.jpg" alt="" loading="lazy">
+        </div>
+        <div class="team__info">
+          <h3 class="team__name">Алексей Синица</h3>
+          <p class="team__role">Руководитель отдела поддержки сайтов</p>
+        </div>
+      </div>
+
+      <!-- Карточка 4 -->
+      <div class="team__member">
+        <div class="team__photo">
+          <img src="/project/images/team/team4.jpg" alt="" loading="lazy">
+        </div>
+        <div class="team__info">
+          <h3 class="team__name">Дарья Бочкарёва</h3>
+          <p class="team__role">Руководитель отдела продвижения</p>
+        </div>
+      </div>
+
+      <!-- Карточка 5 -->
+      <div class="team__member">
+        <div class="team__photo">
+          <img src="/project/images/team/team5.jpg" alt="" loading="lazy">
+        </div>
+        <div class="team__info">
+          <h3 class="team__name">Ирина Торкунова</h3>
+          <p class="team__role">Менеджер по работе с клиентами</p>
+        </div>
+      </div>
+
+      <!-- Карточка 6 -->
+      <!-- <div class="team__member">
+        <div class="team__photo">
+          <img src="/images/team/team6.png" alt="" loading="lazy">
+        </div>
+        <div class="team__info">
+          <h3 class="team__name">Вадим</h3>
+          <p class="team__role">Планирование задач</p>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</section>
+
+<section class="reviews section">
+  <div class="container">
+    <!-- Заголовок секции -->
+    <div class="reviews__header">
+      <h2 class="reviews__title">Отзывы</h2>
+    </div>
+
+    <!-- Фоновая графика -->
+    <img src="/project/images/reviews/mark.svg" alt="" class="reviews__decor" />
+
+    <!-- Слайдер -->
+    <div class="reviews__slider">
+      <div class="reviews__cards">
+        <!-- Карточка 1 -->
+        <article class="review-card" data-index="0">
+          <div class="review-card__content">
+            <div class="review-card__logo">
+              <img src="/project/images/reviews/logo1.png" alt="Логотип компании 1">
+            </div>
+            <a href="#" class="review-card__title">
+              Оперативно и качественно решили сложную проблему с безопасностью нашего портала. Рекомендуем как надежного партнера!
+            </a>
+            <p class="review-card__author">
+              Сергей Новиков, технический директор, Ciel parfum
+            </p>
+          </div>
+          <div class="review-card__nav">
+            <div class="review-card__navigation">
+              <button class="review-card__arrow review-card__arrow--prev" data-direction="prev">‹</button>
+              <span class="review-card__counter">01 / 07</span>
+              <button class="review-card__arrow review-card__arrow--next" data-direction="next">›</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Карточка 2 -->
+        <article class="review-card" data-index="1">
+          <div class="review-card__content">
+            <div class="review-card__logo">
+              <img src="/project/images/reviews/logo2.png" alt="Логотип компании 2">
+            </div>
+            <a href="#" class="review-card__title">
+              Благодаря Drupal Coder наша система управления контентом работает как часы. Отличная техническая поддержка и глубокое знание Drupal.
+            </a>
+            <p class="review-card__author">
+              Анна Мельникова, руководитель отдела веб-проектов, Serebro.Ag
+            </p>
+          </div>
+          <div class="review-card__nav">
+            <div class="review-card__navigation">
+              <button class="review-card__arrow review-card__arrow--prev" data-direction="prev">‹</button>
+              <span class="review-card__counter">02 / 07</span>
+              <button class="review-card__arrow review-card__arrow--next" data-direction="next">›</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Карточка 3 -->
+        <article class="review-card" data-index="2">
+          <div class="review-card__content">
+            <div class="review-card__logo">
+              <img src="/project/images/reviews/logo3.png" alt="Логотип компании 3">
+            </div>
+            <a href="#" class="review-card__title">
+              Профессионалы высокого уровня. Всегда находят оптимальное решение, даже для нестандартных задач нашего образовательного проекта.
+            </a>
+            <p class="review-card__author">
+              Дмитрий Волков, IT-менеджер, Estee
+            </p>
+          </div>
+          <div class="review-card__nav">
+            <div class="review-card__navigation">
+              <button class="review-card__arrow review-card__arrow--prev" data-direction="prev">‹</button>
+              <span class="review-card__counter">03 / 07</span>
+              <button class="review-card__arrow review-card__arrow--next" data-direction="next">›</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Карточка 4 -->
+        <article class="review-card" data-index="3">
+          <div class="review-card__content">
+            <div class="review-card__logo">
+              <img src="/project/images/reviews/logo4.png" alt="Логотип компании 4">
+            </div>
+            <a href="#" class="review-card__title">
+              Специалисты Drupal Coder взяли на себя всю техническую сторону поддержки сайта, что позволило нам сосредоточиться на научной работе.
+            </a>
+            <p class="review-card__author">
+              Мария Ковалева, ведущий научный сотрудник, Лаборатория физико-химических методов анализа
+            </p>
+          </div>
+          <div class="review-card__nav">
+            <div class="review-card__navigation">
+              <button class="review-card__arrow review-card__arrow--prev" data-direction="prev">‹</button>
+              <span class="review-card__counter">04 / 07</span>
+              <button class="review-card__arrow review-card__arrow--next" data-direction="next">›</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Карточка 5 -->
+        <article class="review-card" data-index="4">
+          <div class="review-card__content">
+            <div class="review-card__logo">
+              <img src="/project/images/reviews/logo5.png" alt="Логотип компании 5">
+            </div>
+            <a href="#" class="review-card__title">
+              Команда Drupal Coder вызвала только положительные впечатления!
+            </a>
+            <p class="review-card__author">
+              Нуреев Александр, менеджер проекта Winamp Russian Community
+            </p>
+          </div>
+          <div class="review-card__nav">
+            <div class="review-card__navigation">
+              <button class="review-card__arrow review-card__arrow--prev" data-direction="prev">‹</button>
+              <span class="review-card__counter">05 / 07</span>
+              <button class="review-card__arrow review-card__arrow--next" data-direction="next">›</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Карточка 6 -->
+        <article class="review-card" data-index="5">
+          <div class="review-card__content">
+            <div class="review-card__logo">
+              <img src="/project/images/reviews/logo6.png" alt="Логотип компании 6">
+            </div>
+            <a href="#" class="review-card__title">
+              Отличная коммуникация и ответственность.
+            </a>
+            <p class="review-card__author">
+              Алиса Петренко, шеф-редактор, «Наша Газета»
+            </p>
+          </div>
+          <div class="review-card__nav">
+            <div class="review-card__navigation">
+              <button class="review-card__arrow review-card__arrow--prev" data-direction="prev">‹</button>
+              <span class="review-card__counter">06 / 07</span>
+              <button class="review-card__arrow review-card__arrow--next" data-direction="next">›</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Карточка 7 -->
+        <article class="review-card" data-index="6">
+          <div class="review-card__content">
+            <div class="review-card__logo">
+              <img src="/project/images/reviews/logo7.png" alt="Логотип компании 7">
+            </div>
+            <a href="#" class="review-card__title">
+              Работаем с Drupal Coder давно. Они не просто «чинят» сайт, а предлагают улучшения для удобства наших клиентов. Настоящие эксперты.
+            </a>
+            <p class="review-card__author">
+              Олег Сорокин, менеджер сервиса Personal Writer
+            </p>
+          </div>
+          <div class="review-card__nav">
+            <div class="review-card__navigation">
+              <button class="review-card__arrow review-card__arrow--prev" data-direction="prev">‹</button>
+              <span class="review-card__counter">07 / 07</span>
+              <button class="review-card__arrow review-card__arrow--next" data-direction="next">›</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- Мобильная навигация -->
+    <div class="review-card__mobile-nav">
+      <button class="review-card__mobile-arrow" data-direction="prev">‹</button>
+      <span class="review-card__mobile-counter">01 / 07</span>
+      <button class="review-card__mobile-arrow" data-direction="next">›</button>
+    </div>
+
+  </div>
+</section>
+
+<section class="partners section">
+  <div class="container">
+    <!-- Заголовок секции -->
+    <div class="partners__header">
+      <h2 class="partners__title">С нами работают</h2>
+      <p class="partners__subtitle">
+        Десятки компаний доверяют нам самое ценное, что у них есть в интернете – свои сайты. Мы делаем всё, чтобы наше сотрудничество было долгим.
+      </p>
+    </div>
+  </div>
+
+  <!-- Карточки партнеров -->
+  <div class="partners__cards-wrapper">
+    <!-- Первый ряд -->
+    <div class="partners__row partners__row--first">
+      <div class="partners__card">
+        <img src="/project/images/partners/partners1.png" alt="Логотип партнера 1">
+      </div>
+      <div class="partners__card">
+        <img src="/project/images/partners/partners2.png" alt="Логотип партнера 2">
+      </div>
+      <div class="partners__card">
+        <img src="/project/images/partners/partners3.png" alt="Логотип партнера 3">
+      </div>
+      <div class="partners__card">
+        <img src="/project/images/partners/partners1.png" alt="Логотип партнера 1">
+      </div>
+      <div class="partners__card">
+        <img src="/project/images/partners/partners2.png" alt="Логотип партнера 2">
+      </div>
+      <div class="partners__card">
+        <img src="/project/images/partners/partners3.png" alt="Логотип партнера 3">
+      </div>
+      <div class="partners__card">
+        <img src="/project/images/partners/partners1.png" alt="Логотип партнера 1">
+      </div>
+      <div class="partners__card">
+        <img src="/project/images/partners/partners2.png" alt="Логотип партнера 2">
+      </div>
+      <div class="partners__card">
+        <img src="/project/images/partners/partners3.png" alt="Логотип партнера 3">
+      </div>
+      <div class="partners__card">
+        <img src="/project/images/partners/partners1.png" alt="Логотип партнера 1">
+      </div>
+    </div>
+
+    <!-- Второй ряд -->
+    <div class="partners__row partners__row--second">
+      <div class="partners__card">
+        <img src="/project/images/partners/partners2.png" alt="Логотип партнера 2">
+      </div>
+      <div class="partners__card">
+        <img src="/project/images/partners/partners3.png" alt="Логотип партнера 3">
+      </div>
+      <div class="partners__card">
+        <img src="/project/images/partners/partners1.png" alt="Логотип партнера 1">
+      </div>
+      <div class="partners__card">
+        <img src="/project/images/partners/partners2.png" alt="Логотип партнера 2">
+      </div>
+      <div class="partners__card">
+        <img src="/project/images/partners/partners3.png" alt="Логотип партнера 3">
+      </div>
+      <div class="partners__card">
+        <img src="/project/images/partners/partners1.png" alt="Логотип партнера 1">
+      </div>
+      <div class="partners__card">
+        <img src="/project/images/partners/partners2.png" alt="Логотип партнера 2">
+      </div>
+      <div class="partners__card">
+        <img src="/project/images/partners/partners3.png" alt="Логотип партнера 3">
+      </div>
+      <div class="partners__card">
+        <img src="/project/images/partners/partners1.png" alt="Логотип партнера 1">
+      </div>
+      <div class="partners__card">
+        <img src="/project/images/partners/partners2.png" alt="Логотип партнера 2">
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="webform">
+  <!-- Декоративные SVG -->
+  <img src="/project/images/webform/footer-icon.svg" alt="" class="webform__decor webform__decor--top">
+  <img src="/project/images/webform/footer-icon.svg" alt="" class="webform__decor webform__decor--bottom">
+
+  <div class="container">
+    <!-- Основное содержимое -->
+    <div class="webform__content">
+      <!-- Левая колонка - текст и контакты -->
+      <div class="webform__info">
+        <h2 class="webform__title">
+          Оставить заявку<br>
+          на поддержку сайта
+        </h2>
+        
+        <p class="webform__description">
+          Заполните форму, и наш менеджер свяжется с вами в течение 15 минут. 
+          Мы обсудим ваш проект, предложим оптимальное решение и рассчитаем стоимость.
+        </p>
+        
+        <div class="webform__contacts">
+          <a href="tel:88002222673" class="webform__contact">
+            <svg class="webform__contact-icon" viewBox="0 0 24 24">
+              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
+            <span class="webform__contact-phone">8 800 222-26-73</span>
+          </a>
+          
+          <a href="mailto:info@drupal-coder.ru" class="webform__contact">
+            <svg class="webform__contact-icon" viewBox="0 0 24 24">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+            <span class="webform__contact-email">info@drupal-coder.ru</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Правая колонка - форма -->
+      <div class="webform__form">
+        <form id="support-form">
+          <!-- ФИО -->
+          <div class="webform__field">
+            <input type="text" name="name" class="webform__input" placeholder="ФИО *" required>
+          </div>
+
+          <!-- Телефон -->
+          <div class="webform__field">
+            <input type="tel" name="phone" class="webform__input" placeholder="Телефон *" required>
+          </div>
+
+          <!-- E-mail -->
+          <div class="webform__field">
+            <input type="email" name="email" class="webform__input" placeholder="E-mail *" required>
+          </div>
+
+          <!-- Дата рождения -->
+          <div class="webform__field">
+            <input type="date" name="birth_date" class="webform__input" placeholder="Дата рождения *" required>
+          </div>
+
+          <!-- Пол -->
+          <div class="webform__field webform__field--inline">
+            <span class="webform__label">Пол *</span>
+            <label><input type="radio" name="gender" value="male" required> Мужской</label>
+            <label><input type="radio" name="gender" value="female"> Женский</label>
+          </div>
+
+          <!-- Любимые языки программирования -->
+          <div class="webform__field">
+            <span class="webform__label">Любимые языки программирования *</span>
+            <select name="languages[]" multiple size="5" class="webform__select" required>
+              <option value="Pascal">Pascal</option>
+              <option value="C">C</option>
+              <option value="C++">C++</option>
+              <option value="JavaScript">JavaScript</option>
+              <option value="PHP">PHP</option>
+              <option value="Python">Python</option>
+              <option value="Java">Java</option>
+              <option value="Haskel">Haskel</option>
+              <option value="Clojure">Clojure</option>
+              <option value="Prolog">Prolog</option>
+              <option value="Scala">Scala</option>
+              <option value="Go">Go</option>
+            </select>
+          </div>
+
+          <!-- Биография -->
+          <div class="webform__field">
+            <textarea name="biography" class="webform__textarea" placeholder="Биография (необязательно)"></textarea>
+          </div>
+
+          <!-- Чекбокс согласия -->
+          <label class="webform__checkbox">
+            <input type="checkbox" name="contract" value="1" required>
+            <span class="webform__checkbox-custom"></span>
+            <span class="webform__checkbox-text">
+              Отправляя заявку, я даю согласие на обработку своих персональных данных
+            </span>
+          </label>
+
+          <button type="submit" class="webform__submit">ОСТАВИТЬ ЗАЯВКУ!</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Разделительная линия -->
+    <div class="webform__divider"></div>
+
+    <!-- Нижняя служебная зона -->
+    <div class="webform__footer">
+      <p class="webform__copyright">
+        © 2023 Drupal-coder. Все права защищены. Drupal является зарегистрированной 
+        торговой маркой Dries Buytaert. 
+        <a href="#">Политика конфиденциальности</a> • 
+        <a href="#">Пользовательское соглашение</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<main class="main">
+  
+</main>
+
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Элементы меню
+    const header = document.querySelector('.header');
+    const burger = document.querySelector('.header__burger');
+    const nav = document.querySelector('.header__nav');
+    const menu = document.querySelector('.header__menu');
+    const dropdowns = document.querySelectorAll('.header__menu-item--dropdown');
+    
+    // Открытие/закрытие мобильного меню
+    if (burger && nav) {
+      burger.addEventListener('click', function() {
+        nav.classList.toggle('header__nav--mobile-open');
+        const isOpen = nav.classList.contains('header__nav--mobile-open');
+        burger.setAttribute('aria-expanded', isOpen);
+        
+        // Блокируем скролл страницы при открытом меню
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+    }
+    
+    // Открытие выпадающих меню на мобильных
+    if (dropdowns.length > 0) {
+      dropdowns.forEach(dropdown => {
+        const link = dropdown.querySelector('.header__menu-link');
+        const dropdownMenu = dropdown.querySelector('.header__dropdown');
+        
+        if (link && dropdownMenu) {
+          link.addEventListener('click', function(e) {
+            // Только на мобильных
+            if (window.innerWidth < 1024) {
+              e.preventDefault();
+              e.stopPropagation();
+              
+              // Закрываем все остальные выпадающие меню
+              document.querySelectorAll('.header__dropdown').forEach(item => {
+                if (item !== dropdownMenu) {
+                  item.classList.remove('header__dropdown--open');
+                }
+              });
+              
+              // Открываем текущее
+              dropdownMenu.classList.toggle('header__dropdown--open');
+            }
+          });
+        }
+      });
+    }
+    
+    // Закрытие меню при клике вне его области (только для мобильных)
+    document.addEventListener('click', function(event) {
+      if (window.innerWidth < 1024 && nav.classList.contains('header__nav--mobile-open')) {
+        const isClickInsideMenu = menu?.contains(event.target);
+        const isClickOnBurger = burger?.contains(event.target);
+        
+        if (!isClickInsideMenu && !isClickOnBurger) {
+          nav.classList.remove('header__nav--mobile-open');
+          burger.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        }
+      }
+    });
+    
+    // Закрытие меню при ресайзе окна на десктоп
+    window.addEventListener('resize', function() {
+      if (window.innerWidth >= 1024) {
+        nav.classList.remove('header__nav--mobile-open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+        
+        // Закрываем все выпадающие меню
+        document.querySelectorAll('.header__dropdown').forEach(item => {
+          item.classList.remove('header__dropdown--open');
+        });
+      }
+    });
+  });
+  </script>
+</body>
+</html>

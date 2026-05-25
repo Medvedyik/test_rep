@@ -1,0 +1,26 @@
+{
+  "name": "lab-6",
+  "version": "1.0.0",
+  "description": "",
+  "main": "vite.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Medvedyik/web-lab6.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Medvedyik/web-lab6/issues"
+  },
+  "homepage": "https://github.com/Medvedyik/web-lab6#readme",
+  "devDependencies": {
+    "vite": "^8.0.14",
+    "vite-plugin-php": "^2.0.4"
+  }
+}
