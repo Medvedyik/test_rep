@@ -54,9 +54,9 @@ if (!$isLoggedIn) {
     try {
         $creds = saveNewApplication($name, $phone, $email, $birth_date, $gender, $languages, $biography, $contract);
         $profileUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://')
-                    . $_SERVER['HTTP_HOST']
-                    . rtrim(dirname($_SERVER['SCRIPT_NAME']), '/')
-                    . '/index.html';
+            . $_SERVER['HTTP_HOST']
+            . rtrim(dirname($_SERVER['SCRIPT_NAME']), '/')
+            . '/profile.php';
         // Отправка email удалена
         echo json_encode([
             'success' => true,
