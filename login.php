@@ -24,7 +24,7 @@ require_once 'config.php';
         if ($user && password_verify($_POST['pass'], $user['password_hash'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['login'] = $_POST['login'];
-            header('Location: index.php');
+            header('Location: index.html');  // ← изменили с index.php на index.html
             exit;
         } else {
             echo '<div class="error" style="margin-bottom: 15px; padding: 10px; background: #f8d7da; color: #721c24; border-radius: 4px;">Неверный логин или пароль</div>';

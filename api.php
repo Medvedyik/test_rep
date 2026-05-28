@@ -30,7 +30,6 @@ if (!$data) {
     exit;
 }
 
-// Извлекаем все поля из запроса
 $name = trim($data['name'] ?? $data['fio'] ?? '');
 $phone = trim($data['phone'] ?? $data['tel'] ?? '');
 $email = trim($data['email'] ?? '');
@@ -40,15 +39,12 @@ $languages = $data['languages'] ?? [];
 $biography = trim($data['message'] ?? $data['comment'] ?? $data['biography'] ?? '');
 $contract = isset($data['contract']) ? (int)$data['contract'] : 0;
 
-// ---- Неавторизованный пользователь: создание новой заявки ----
 if (!$isLoggedIn) {
-    // Обязательные поля
     if (!$name || !$phone || !$email || !$birth_date || !$gender || empty($languages)) {
         http_response_code(400);
         echo json_encode(['error' => 'Обязательные поля: name, phone, email, birth_date, gender, languages']);
         exit;
     }
-    // Валидация всех полей
     $errors = validateFormData($name, $phone, $email, $birth_date, $gender, $languages, $biography, $contract);
     if (!empty($errors)) {
         http_response_code(422);
@@ -57,20 +53,11 @@ if (!$isLoggedIn) {
     }
     try {
         $creds = saveNewApplication($name, $phone, $email, $birth_date, $gender, $languages, $biography, $contract);
-        // Формируем URL страницы с формой (для входа)
         $profileUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://')
                     . $_SERVER['HTTP_HOST']
                     . rtrim(dirname($_SERVER['SCRIPT_NAME']), '/')
                     . '/index.html';
-        // Отправка email с логином и паролем
-        $to = $email;
-        $subject = "Данные для редактирования заявки";
-        $messageBody = "Здравствуйте, $name!\n\nВаша заявка успешно сохранена.\nЛогин для редактирования: {$creds['login']}\nПароль: {$creds['pass']}\n\nСсылка для входа: $profileUrl\n\nС уважением,\nАдминистрация сайта.";
-        $headers = "From: noreply@kubsu-dev.ru\r\n" .
-                   "Reply-To: noreply@kubsu-dev.ru\r\n" .
-                   "X-Mailer: PHP/" . phpversion();
-        @mail($to, $subject, $messageBody, $headers); // @ подавляет предупреждения, если почта не настроена
-
+        // Отправка email удалена
         echo json_encode([
             'success' => true,
             'login' => $creds['login'],
@@ -84,7 +71,6 @@ if (!$isLoggedIn) {
     exit;
 }
 
-// ---- Авторизованный пользователь: обновление данных ----
 if (!$name || !$phone || !$email || !$birth_date || !$gender || empty($languages)) {
     http_response_code(400);
     echo json_encode(['error' => 'Для обновления нужны все поля (name, phone, email, birth_date, gender, languages)']);
@@ -99,7 +85,6 @@ if (!$current) {
     echo json_encode(['error' => 'Заявка не найдена']);
     exit;
 }
-// Валидация (используем переданные данные)
 $errors = validateFormData($name, $phone, $email, $birth_date, $gender, $languages, $biography, $contract);
 if (!empty($errors)) {
     http_response_code(422);
