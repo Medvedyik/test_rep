@@ -3,6 +3,17 @@ session_start();
 require_once 'config.php';
 require_once 'functions.php';
 
+// ПЕРЕХВАТ ЗАГОЛОВКА HTTP_AUTHORIZATION (для CGI/FastCGI)
+if (!isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['HTTP_AUTHORIZATION'])) {
+    $auth = $_SERVER['HTTP_AUTHORIZATION'];
+    if (preg_match('/Basic\s+(.*)$/i', $auth, $matches)) {
+        $decoded = base64_decode($matches[1]);
+        if ($decoded !== false && strpos($decoded, ':') !== false) {
+            list($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']) = explode(':', $decoded, 2);
+        }
+    }
+}
+
 // ---------- HTTP Basic Authentication с fallback ----------
 $adminAuth = false;
 
