@@ -3,37 +3,118 @@ session_start();
 require_once 'config.php';
 require_once 'functions.php';
 
-// Перехват заголовка Authorization (для CGI/FastCGI)
-if (!isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['HTTP_AUTHORIZATION'])) {
-    $auth = $_SERVER['HTTP_AUTHORIZATION'];
-    if (preg_match('/Basic\s+(.*)$/i', $auth, $matches)) {
-        $decoded = base64_decode($matches[1]);
-        if ($decoded !== false && strpos($decoded, ':') !== false) {
-            list($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']) = explode(':', $decoded, 2);
-        }
+$adminAuth = false;
+$error = '';
+
+// Проверка сессии
+if (!empty($_SESSION['admin_logged_in'])) {
+    $adminAuth = true;
+}
+
+// Обработка POST-формы входа
+if (!$adminAuth && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['auth_login'])) {
+    $login = $_POST['auth_login'];
+    $password = $_POST['auth_pass'];
+    $pdo = getDB();
+    $stmt = $pdo->prepare("SELECT password_hash FROM admin WHERE username = ?");
+    $stmt->execute([$login]);
+    $adminRow = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($adminRow && password_verify($password, $adminRow['password_hash'])) {
+        $_SESSION['admin_logged_in'] = true;
+        $_SESSION['admin_login'] = $login;
+        $adminAuth = true;
+        // Редирект, чтобы убрать POST-данные
+        header('Location: ' . $_SERVER['SCRIPT_NAME']);
+        exit;
+    } else {
+        $error = 'Неверный логин или пароль';
     }
 }
 
-// HTTP Basic Authentication
-$adminAuth = false;
-if (isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
-    $pdo = getDB();
-    $stmt = $pdo->prepare("SELECT password_hash FROM admin WHERE username = ?");
-    $stmt->execute([$_SERVER['PHP_AUTH_USER']]);
-    $adminRow = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($adminRow && password_verify($_SERVER['PHP_AUTH_PW'], $adminRow['password_hash'])) {
-        $adminAuth = true;
-    }
-}
+// Если не авторизован – показываем форму входа
 if (!$adminAuth) {
-    header('HTTP/1.1 401 Unauthorized');
-    header('WWW-Authenticate: Basic realm="Admin Panel"');
-    echo '<h1>401 Требуется авторизация</h1>';
+    ?>
+    <!DOCTYPE html>
+    <html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Вход администратора</title>
+        <style>
+            body {
+                font-family: 'Segoe UI', Roboto, sans-serif;
+                background: #eef2f5;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+            .login-card {
+                background: white;
+                padding: 30px;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                width: 320px;
+                text-align: center;
+            }
+            .login-card h2 {
+                margin: 0 0 20px;
+                color: #1e3a5f;
+                font-weight: 500;
+            }
+            .login-card input {
+                width: 100%;
+                padding: 10px;
+                margin: 8px 0 16px;
+                border: 1px solid #cbd5e1;
+                border-radius: 6px;
+                font-size: 14px;
+                box-sizing: border-box;
+            }
+            .login-card button {
+                width: 100%;
+                background: #2c5f2d;
+                color: white;
+                padding: 10px;
+                border: none;
+                border-radius: 6px;
+                font-size: 16px;
+                cursor: pointer;
+            }
+            .login-card button:hover {
+                background: #1f4a20;
+            }
+            .error {
+                color: #c62828;
+                margin-bottom: 15px;
+                font-size: 14px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="login-card">
+            <h2>Административная панель</h2>
+            <?php if ($error): ?>
+                <div class="error"><?= h($error) ?></div>
+            <?php endif; ?>
+            <form method="post">
+                <label>Логин</label>
+                <input type="text" name="auth_login" required autofocus>
+                <label>Пароль</label>
+                <input type="password" name="auth_pass" required>
+                <button type="submit">Войти</button>
+            </form>
+        </div>
+    </body>
+    </html>
+    <?php
     exit;
 }
 
-// Обработка действий: удаление, редактирование
+// ---------- Администратор авторизован – основная логика ----------
 $pdo = getDB();
+
+// Обработка удаления и редактирования
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     if (empty($_POST['csrf_token']) || !validateCsrfToken($_POST['csrf_token'])) {
         die('Ошибка CSRF-проверки');
@@ -69,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     }
 }
 
-// Получаем все заявки
+// Получение всех заявок
 $applications = $pdo->query("
     SELECT a.id, a.user_id, a.fio, a.phone, a.email, a.birth_date, a.gender, a.biography, a.contract_accepted, a.created_at, a.updated_at,
            u.login
@@ -127,9 +208,8 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
     <meta charset="UTF-8">
     <title>Панель администратора</title>
     <style>
-        /* Военные стили – аккуратно и строго */
         body {
-            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
             background: #eef2f5;
             margin: 0;
             padding: 20px;
@@ -313,6 +393,7 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
 <body>
 <div style="margin-bottom: 20px;">
     <a href="/project/" class="back-link">← Вернуться на сайт</a>
+    <a href="?logout=1" style="float:right;">Выйти</a>
 </div>
 
 <div class="container">
@@ -341,29 +422,29 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
             </thead>
             <tbody>
             <?php foreach ($applications as $app): ?>
-                <tr>
-                    <td><?= $app['id'] ?></td>
-                    <td><?= h($app['login']) ?></td>
-                    <td><?= h($app['fio']) ?></td>
-                    <td><?= h($app['phone']) ?></td>
-                    <td><?= h($app['email']) ?></td>
-                    <td><?= h($app['birth_date']) ?></td>
-                    <td><?= $app['gender'] === 'male' ? 'Мужской' : 'Женский' ?></td>
-                    <td><?= h($app['languages']) ?></td>
-                    <td><?= h($app['biography']) ?></td>
-                    <td><?= $app['contract_accepted'] ? 'Да' : 'Нет' ?></td>
-                    <td><?= $app['created_at'] ?></td>
-                    <td><?= $app['updated_at'] ?></td>
-                    <td>
-                        <a href="admin.php?edit=<?= $app['user_id'] ?>">Редактировать</a><br>
-                        <form class="inline-form" method="post" onsubmit="return confirm('Удалить запись?');">
-                            <input type="hidden" name="action" value="delete">
-                            <input type="hidden" name="user_id" value="<?= $app['user_id'] ?>">
-                            <input type="hidden" name="csrf_token" value="<?= generateCsrfToken() ?>">
-                            <button type="submit">Удалить</button>
-                        </form>
-                    </td>
-                </tr>
+            <tr>
+                <td><?= $app['id'] ?></td>
+                <td><?= h($app['login']) ?></td>
+                <td><?= h($app['fio']) ?></td>
+                <td><?= h($app['phone']) ?></td>
+                <td><?= h($app['email']) ?></td>
+                <td><?= h($app['birth_date']) ?></td>
+                <td><?= $app['gender'] === 'male' ? 'Мужской' : 'Женский' ?></td>
+                <td><?= h($app['languages']) ?></td>
+                <td><?= h($app['biography']) ?></td>
+                <td><?= $app['contract_accepted'] ? 'Да' : 'Нет' ?></td>
+                <td><?= $app['created_at'] ?></td>
+                <td><?= $app['updated_at'] ?></td>
+                <td>
+                    <a href="admin.php?edit=<?= $app['user_id'] ?>">Редактировать</a><br>
+                    <form class="inline-form" method="post" onsubmit="return confirm('Удалить запись?');">
+                        <input type="hidden" name="action" value="delete">
+                        <input type="hidden" name="user_id" value="<?= $app['user_id'] ?>">
+                        <input type="hidden" name="csrf_token" value="<?= generateCsrfToken() ?>">
+                        <button type="submit">Удалить</button>
+                    </form>
+                </td>
+            </tr>
             <?php endforeach; ?>
             </tbody>
         </table>
