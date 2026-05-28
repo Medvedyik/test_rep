@@ -43,7 +43,7 @@ require_once 'config.php';
         <button type="submit">Войти</button>
 		<input type="hidden" name="csrf_token" value="<?= generateCsrfToken() ?>">
     </form>
-    <p><a href="index.php">На главную</a></p>
+    <p><a href="/project">На главную</a></p>
 </div>
 </body>
 </html>

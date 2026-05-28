@@ -30,40 +30,47 @@ if (!$data) {
     exit;
 }
 
+// Извлекаем все поля из запроса
 $name = trim($data['name'] ?? $data['fio'] ?? '');
 $phone = trim($data['phone'] ?? $data['tel'] ?? '');
 $email = trim($data['email'] ?? '');
+$birth_date = trim($data['birth_date'] ?? '');
+$gender = $data['gender'] ?? '';
+$languages = $data['languages'] ?? [];
 $biography = trim($data['message'] ?? $data['comment'] ?? $data['biography'] ?? '');
+$contract = isset($data['contract']) ? (int)$data['contract'] : 0;
 
 // ---- Неавторизованный пользователь: создание новой заявки ----
 if (!$isLoggedIn) {
-    if (!$name || !$phone || !$email) {
+    // Обязательные поля
+    if (!$name || !$phone || !$email || !$birth_date || !$gender || empty($languages)) {
         http_response_code(400);
-        echo json_encode(['error' => 'Обязательные поля: name, phone, email']);
+        echo json_encode(['error' => 'Обязательные поля: name, phone, email, birth_date, gender, languages']);
         exit;
     }
-    $defaults = [
-        'birth_date' => '2000-01-01',
-        'gender' => 'male',
-        'languages' => ['JavaScript'],
-        'contract' => 1
-    ];
-    $errors = validateFormData($name, $phone, $email, $defaults['birth_date'],
-                               $defaults['gender'], $defaults['languages'],
-                               $biography, $defaults['contract']);
+    // Валидация всех полей
+    $errors = validateFormData($name, $phone, $email, $birth_date, $gender, $languages, $biography, $contract);
     if (!empty($errors)) {
         http_response_code(422);
         echo json_encode(['errors' => $errors]);
         exit;
     }
     try {
-        $creds = saveNewApplication($name, $phone, $email, $defaults['birth_date'],
-                                    $defaults['gender'], $defaults['languages'],
-                                    $biography, $defaults['contract']);
+        $creds = saveNewApplication($name, $phone, $email, $birth_date, $gender, $languages, $biography, $contract);
+        // Формируем URL страницы с формой (для входа)
         $profileUrl = (isset($_SERVER['HTTPS']) ? 'https://' : 'http://')
                     . $_SERVER['HTTP_HOST']
                     . rtrim(dirname($_SERVER['SCRIPT_NAME']), '/')
-                    . '/index.html'; // страница с формой
+                    . '/index.html';
+        // Отправка email с логином и паролем
+        $to = $email;
+        $subject = "Данные для редактирования заявки";
+        $messageBody = "Здравствуйте, $name!\n\nВаша заявка успешно сохранена.\nЛогин для редактирования: {$creds['login']}\nПароль: {$creds['pass']}\n\nСсылка для входа: $profileUrl\n\nС уважением,\nАдминистрация сайта.";
+        $headers = "From: noreply@kubsu-dev.ru\r\n" .
+                   "Reply-To: noreply@kubsu-dev.ru\r\n" .
+                   "X-Mailer: PHP/" . phpversion();
+        @mail($to, $subject, $messageBody, $headers); // @ подавляет предупреждения, если почта не настроена
+
         echo json_encode([
             'success' => true,
             'login' => $creds['login'],
@@ -78,9 +85,9 @@ if (!$isLoggedIn) {
 }
 
 // ---- Авторизованный пользователь: обновление данных ----
-if (!$name || !$phone || !$email) {
+if (!$name || !$phone || !$email || !$birth_date || !$gender || empty($languages)) {
     http_response_code(400);
-    echo json_encode(['error' => 'Для обновления нужны name, phone, email']);
+    echo json_encode(['error' => 'Для обновления нужны все поля (name, phone, email, birth_date, gender, languages)']);
     exit;
 }
 $pdo = getDB();
@@ -92,25 +99,15 @@ if (!$current) {
     echo json_encode(['error' => 'Заявка не найдена']);
     exit;
 }
-// Получаем текущие языки пользователя
-$stmtLang = $pdo->prepare("SELECT pl.name FROM application_languages_lab5 al
-                           JOIN programming_languages_lab5 pl ON al.language_id = pl.id
-                           WHERE al.application_id = ?");
-$stmtLang->execute([$current['id']]);
-$languages = $stmtLang->fetchAll(PDO::FETCH_COLUMN);
-
-$errors = validateFormData($name, $phone, $email, $current['birth_date'],
-                           $current['gender'], $languages, $biography,
-                           $current['contract_accepted']);
+// Валидация (используем переданные данные)
+$errors = validateFormData($name, $phone, $email, $birth_date, $gender, $languages, $biography, $contract);
 if (!empty($errors)) {
     http_response_code(422);
     echo json_encode(['errors' => $errors]);
     exit;
 }
 try {
-    updateApplication($userId, $name, $phone, $email, $current['birth_date'],
-                      $current['gender'], $languages, $biography,
-                      $current['contract_accepted']);
+    updateApplication($userId, $name, $phone, $email, $birth_date, $gender, $languages, $biography, $contract);
     echo json_encode(['success' => true, 'message' => 'Данные обновлены']);
 } catch (PDOException $e) {
     http_response_code(500);

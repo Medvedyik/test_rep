@@ -169,6 +169,11 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
     </style>
 </head>
 <body>
+
+<div style="margin-bottom: 20px;">
+  <a href="/project/" style="color: #f04b32; text-decoration: none;">← Вернуться на сайт</a>
+</div>
+
 <div class="container">
     <h1>Администрирование анкет</h1>
     <?php if (isset($message)): ?>
