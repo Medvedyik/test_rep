@@ -3,6 +3,17 @@ session_start();
 require_once 'config.php';
 require_once 'functions.php';
 
+// Перехват заголовка Authorization (для CGI/FastCGI)
+if (!isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['HTTP_AUTHORIZATION'])) {
+    $auth = $_SERVER['HTTP_AUTHORIZATION'];
+    if (preg_match('/Basic\s+(.*)$/i', $auth, $matches)) {
+        $decoded = base64_decode($matches[1]);
+        if ($decoded !== false && strpos($decoded, ':') !== false) {
+            list($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']) = explode(':', $decoded, 2);
+        }
+    }
+}
+
 // HTTP Basic Authentication
 $adminAuth = false;
 if (isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
@@ -24,19 +35,17 @@ if (!$adminAuth) {
 // Обработка действий: удаление, редактирование
 $pdo = getDB();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
-	if (empty($_POST['csrf_token']) || !validateCsrfToken($_POST['csrf_token'])) {
-		die('Ошибка CSRF-проверки');
-	}
+    if (empty($_POST['csrf_token']) || !validateCsrfToken($_POST['csrf_token'])) {
+        die('Ошибка CSRF-проверки');
+    }
     $action = $_POST['action'];
     if ($action === 'delete' && isset($_POST['user_id'])) {
         $userId = (int)$_POST['user_id'];
-        // Удаляем пользователя и связанные данные (каскадно)
         $stmt = $pdo->prepare("DELETE FROM users_lab5 WHERE id = ?");
         $stmt->execute([$userId]);
         $message = "Запись удалена.";
     } elseif ($action === 'edit' && isset($_POST['user_id'])) {
         $userId = (int)$_POST['user_id'];
-        // Получаем данные из формы редактирования
         $fio = trim($_POST['fio']);
         $phone = trim($_POST['phone']);
         $email = trim($_POST['email']);
@@ -60,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     }
 }
 
-// Получаем все заявки вместе с логинами пользователей и языками
+// Получаем все заявки
 $applications = $pdo->query("
     SELECT a.id, a.user_id, a.fio, a.phone, a.email, a.birth_date, a.gender, a.biography, a.contract_accepted, a.created_at, a.updated_at,
            u.login
@@ -69,7 +78,6 @@ $applications = $pdo->query("
     ORDER BY a.id DESC
 ")->fetchAll(PDO::FETCH_ASSOC);
 
-// Для каждой заявки получаем список языков
 foreach ($applications as &$app) {
     $stmt = $pdo->prepare("
         SELECT pl.name FROM application_languages_lab5 al
@@ -82,7 +90,16 @@ foreach ($applications as &$app) {
 }
 unset($app);
 
-// Если требуется редактирование конкретной записи, загружаем данные для формы
+// Статистика по языкам
+$stats = $pdo->query("
+    SELECT pl.name, COUNT(al.application_id) as cnt
+    FROM programming_languages_lab5 pl
+    LEFT JOIN application_languages_lab5 al ON pl.id = al.language_id
+    GROUP BY pl.id
+    ORDER BY cnt DESC, pl.name
+")->fetchAll(PDO::FETCH_ASSOC);
+
+// Данные для редактирования
 $editData = null;
 if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
     $editId = (int)$_GET['edit'];
@@ -94,7 +111,6 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
     $stmt->execute([$editId]);
     $editData = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($editData) {
-        // Получаем языки для этой заявки
         $stmtLang = $pdo->prepare("
             SELECT pl.name FROM application_languages_lab5 al
             JOIN programming_languages_lab5 pl ON al.language_id = pl.id
@@ -105,17 +121,15 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Панель администратора</title>
-    <link rel="stylesheet" href="style.css">
     <style>
-        /* Основные стили */
+        /* Военные стили – аккуратно и строго */
         body {
-            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
             background: #eef2f5;
             margin: 0;
             padding: 20px;
@@ -129,7 +143,6 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             padding: 20px 25px;
         }
-        /* Заголовки */
         h1, h2 {
             font-weight: 500;
             border-bottom: 2px solid #cbd5e1;
@@ -138,14 +151,12 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
         }
         h1 { font-size: 24px; color: #0f3b2c; }
         h2 { font-size: 20px; margin: 20px 0 15px; }
-        /* Статистика */
         .stats {
             background: #f8fafc;
             border-left: 4px solid #2c7a4d;
             padding: 12px 18px;
             border-radius: 6px;
             margin: 20px 0;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
         }
         .stats ul {
             display: flex;
@@ -162,7 +173,6 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
             border: 1px solid #d1dbe8;
             font-size: 14px;
         }
-        /* Таблица */
         .table-wrapper {
             overflow-x: auto;
             margin: 20px 0;
@@ -190,7 +200,6 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
         tr:hover td {
             background-color: #fafcff;
         }
-        /* Сообщения */
         .message {
             padding: 10px 16px;
             border-radius: 6px;
@@ -205,14 +214,12 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
             background: #ffebee;
             color: #b71c1c;
         }
-        /* Форма редактирования */
         .edit-form {
             margin-top: 30px;
             padding: 20px;
             border: 1px solid #cfdde6;
             border-radius: 12px;
             background: #f9fbfd;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
         .field {
             margin-bottom: 16px;
@@ -240,10 +247,7 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
             width: auto;
             margin-right: 6px;
         }
-        .field label input[type="radio"] {
-            margin-right: 4px;
-        }
-        button, a.button-like {
+        button, a.back-link {
             background: #2c5f2d;
             color: white;
             border: none;
@@ -283,11 +287,9 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
             background: none;
             text-decoration: none;
         }
-        /* Ссылка возврата */
         .back-link {
-            margin-bottom: 20px;
             display: inline-block;
-            font-size: 14px;
+            margin-bottom: 20px;
             background: #eef2f5;
             padding: 6px 14px;
             border-radius: 30px;
@@ -297,8 +299,8 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
         }
         .back-link:hover {
             background: #e2e8f0;
+            text-decoration: none;
         }
-        /* Прочее */
         a {
             color: #2c5f2d;
             text-decoration: none;
@@ -309,12 +311,27 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
     </style>
 </head>
 <body>
-
 <div style="margin-bottom: 20px;">
-  <a href="/project/" style="color: #f04b32; text-decoration: none;">← Вернуться на сайт</a>
+    <a href="/project/" class="back-link">← Вернуться на сайт</a>
 </div>
 
 <div class="container">
+    <h1>Администрирование анкет</h1>
+    <?php if (isset($message)): ?>
+        <div class="message"><?= h($message) ?></div>
+    <?php endif; ?>
+    <?php if (isset($errorMessage)): ?>
+        <div class="message error"><?= h($errorMessage) ?></div>
+    <?php endif; ?>
+
+    <div class="stats">
+        <h2>Статистика по языкам программирования</h2>
+        <ul>
+            <?php foreach ($stats as $stat): ?>
+                <li><?= h($stat['name']) ?>: <?= (int)$stat['cnt'] ?> пользователей</li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
 
     <h2>Список заявок</h2>
     <div class="table-wrapper">
@@ -342,8 +359,8 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
                         <form class="inline-form" method="post" onsubmit="return confirm('Удалить запись?');">
                             <input type="hidden" name="action" value="delete">
                             <input type="hidden" name="user_id" value="<?= $app['user_id'] ?>">
-							<input type="hidden" name="csrf_token" value="<?= generateCsrfToken() ?>">
-                            <button type="submit" style="background:none; border:none; color:red; cursor:pointer;">Удалить</button>
+                            <input type="hidden" name="csrf_token" value="<?= generateCsrfToken() ?>">
+                            <button type="submit">Удалить</button>
                         </form>
                     </td>
                 </tr>
@@ -358,8 +375,8 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
             <form method="post">
                 <input type="hidden" name="action" value="edit">
                 <input type="hidden" name="user_id" value="<?= $editData['user_id'] ?>">
-				<input type="hidden" name="csrf_token" value="<?= generateCsrfToken() ?>">
-				<div class="field">
+                <input type="hidden" name="csrf_token" value="<?= generateCsrfToken() ?>">
+                <div class="field">
                     <label>ФИО *</label>
                     <input type="text" name="fio" value="<?= h($editData['fio']) ?>" required>
                 </div>
