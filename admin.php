@@ -122,50 +122,199 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
     <title>Панель администратора</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        /* Основные стили */
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            background: #eef2f5;
+            margin: 0;
+            padding: 20px;
+            color: #1e2a3a;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 20px 25px;
+        }
+        /* Заголовки */
+        h1, h2 {
+            font-weight: 500;
+            border-bottom: 2px solid #cbd5e1;
+            padding-bottom: 8px;
+            margin-top: 0;
+        }
+        h1 { font-size: 24px; color: #0f3b2c; }
+        h2 { font-size: 20px; margin: 20px 0 15px; }
+        /* Статистика */
+        .stats {
+            background: #f8fafc;
+            border-left: 4px solid #2c7a4d;
+            padding: 12px 18px;
+            border-radius: 6px;
+            margin: 20px 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        }
+        .stats ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            list-style: none;
+            padding: 0;
+            margin: 8px 0 0;
+        }
+        .stats li {
+            background: white;
+            padding: 6px 14px;
+            border-radius: 30px;
+            border: 1px solid #d1dbe8;
+            font-size: 14px;
+        }
+        /* Таблица */
         .table-wrapper {
             overflow-x: auto;
             margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
         }
         table {
             width: 100%;
             border-collapse: collapse;
+            font-size: 13px;
             min-width: 1200px;
         }
         th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
+            padding: 10px 12px;
             text-align: left;
             vertical-align: top;
+            border-bottom: 1px solid #e2e8f0;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #1e3a5f;
+            border-bottom: 2px solid #cbd5e1;
         }
-        .stats {
-            margin: 20px 0;
-            padding: 10px;
-            background: #f9f9f9;
-            border-radius: 5px;
+        tr:hover td {
+            background-color: #fafcff;
         }
+        /* Сообщения */
         .message {
-            background: #d4edda;
-            color: #155724;
-            padding: 10px;
+            padding: 10px 16px;
+            border-radius: 6px;
             margin-bottom: 20px;
-            border-radius: 4px;
+            font-size: 14px;
+            border-left: 4px solid #2e7d32;
+            background: #e8f5e9;
+            color: #1b5e20;
         }
-        .error {
-            background: #f8d7da;
-            color: #721c24;
+        .message.error {
+            border-left-color: #c62828;
+            background: #ffebee;
+            color: #b71c1c;
         }
+        /* Форма редактирования */
         .edit-form {
             margin-top: 30px;
-            padding: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background: #fefefe;
+            padding: 20px;
+            border: 1px solid #cfdde6;
+            border-radius: 12px;
+            background: #f9fbfd;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
-        .edit-form h2 { margin-top: 0; }
-        .inline-form { display: inline; }
+        .field {
+            margin-bottom: 16px;
+        }
+        .field label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #1e3a5f;
+        }
+        .field input, .field select, .field textarea {
+            width: 100%;
+            max-width: 500px;
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 14px;
+            background: white;
+        }
+        .field select[multiple] {
+            height: 120px;
+        }
+        .field input[type="radio"] {
+            width: auto;
+            margin-right: 6px;
+        }
+        .field label input[type="radio"] {
+            margin-right: 4px;
+        }
+        button, a.button-like {
+            background: #2c5f2d;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        button:hover {
+            background: #1f4a20;
+        }
+        .edit-form a {
+            background: #6c757d;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        .edit-form a:hover {
+            background: #5a6268;
+        }
+        .inline-form button {
+            background: none;
+            color: #c62828;
+            padding: 0;
+            font-size: 13px;
+            text-decoration: underline;
+            border: none;
+        }
+        .inline-form button:hover {
+            color: #b71c1c;
+            background: none;
+            text-decoration: none;
+        }
+        /* Ссылка возврата */
+        .back-link {
+            margin-bottom: 20px;
+            display: inline-block;
+            font-size: 14px;
+            background: #eef2f5;
+            padding: 6px 14px;
+            border-radius: 30px;
+            color: #2c5f2d;
+            text-decoration: none;
+            border: 1px solid #cbd5e1;
+        }
+        .back-link:hover {
+            background: #e2e8f0;
+        }
+        /* Прочее */
+        a {
+            color: #2c5f2d;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
