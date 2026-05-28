@@ -82,15 +82,6 @@ foreach ($applications as &$app) {
 }
 unset($app);
 
-// Статистика по языкам
-// $stats = $pdo->query("
-//     SELECT pl.name, COUNT(al.application_id) as cnt
-//     FROM programming_languages_lab5 pl
-//     LEFT JOIN application_languages_lab5 al ON pl.id = al.language_id
-//     GROUP BY pl.id
-//     ORDER BY cnt DESC, pl.name
-// ")->fetchAll(PDO::FETCH_ASSOC);
-
 // Если требуется редактирование конкретной записи, загружаем данные для формы
 $editData = null;
 if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
@@ -324,22 +315,6 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
 </div>
 
 <div class="container">
-    <h1>Администрирование анкет</h1>
-    <?php if (isset($message)): ?>
-        <div class="message"><?= h($message) ?></div>
-    <?php endif; ?>
-    <?php if (isset($errorMessage)): ?>
-        <div class="message error"><?= h($errorMessage) ?></div>
-    <?php endif; ?>
-
-    <!-- <div class="stats">
-        <h2>Статистика по языкам программирования</h2>
-        <ul>
-            <?php foreach ($stats as $stat): ?>
-                <li><?= h($stat['name']) ?>: <?= (int)$stat['cnt'] ?> пользователей</li>
-            <?php endforeach; ?>
-        </ul>
-    </div> -->
 
     <h2>Список заявок</h2>
     <div class="table-wrapper">
