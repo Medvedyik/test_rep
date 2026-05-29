@@ -3,6 +3,13 @@ session_start();
 require_once 'config.php';
 require_once 'functions.php';
 
+// Выход из админки
+if (isset($_GET['logout'])) {
+    session_destroy();
+    header('Location: admin.php');
+    exit;
+}
+
 $adminAuth = false;
 $error = '';
 
