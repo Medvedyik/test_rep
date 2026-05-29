@@ -388,6 +388,19 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
         a:hover {
             text-decoration: underline;
         }
+        .field-checkbox label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: normal;
+            margin-bottom: 0;
+        }
+        .field-checkbox input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+            transform: scale(1.1);
+            cursor: pointer;
+        }        
     </style>
 </head>
 <body>
@@ -490,7 +503,7 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
                     <label>Биография</label>
                     <textarea name="biography" rows="5"><?= h($editData['biography']) ?></textarea>
                 </div>
-                <div class="field">
+                <div class="field field-checkbox">
                     <label><input type="checkbox" name="contract" value="1" <?= $editData['contract_accepted'] ? 'checked' : '' ?>> Контракт ознакомлен *</label>
                 </div>
                 <button type="submit">Сохранить изменения</button>
