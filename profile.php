@@ -158,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             background: #ffebee;
             color: #b71c1c;
         }
-        .back-link {
+        /* .back-link {
             display: inline-block;
             margin-top: 20px;
             background: #eef2f5;
@@ -170,6 +170,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         }
         .back-link:hover {
             background: #e2e8f0;
+        } */
+
+        .field-checkbox label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: normal;
+            margin-bottom: 0;
+        }
+        .field-checkbox input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+            transform: scale(1.1);
+            cursor: pointer;
         }
     </style>
 </head>
@@ -229,12 +243,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             <label>Биография</label>
             <textarea name="biography" rows="5"><?= htmlspecialchars($userData['biography']) ?></textarea>
         </div>
-        <div class="field">
-            <label><input type="checkbox" name="contract" value="1" <?= $userData['contract_accepted'] ? 'checked' : '' ?>> Я ознакомлен с контрактом *</label>
+        <div class="field field-checkbox">
+            <label><input type="checkbox" name="contract" value="1" <?= $userData['contract_accepted'] ? 'checked' : '' ?>> С контрактом ознакомлен *</label>
         </div>
         <button type="submit">Сохранить изменения</button>
     </form>
-    <a href="/project/" class="back-link">← Вернуться на сайт</a>
+    <a href="/project/">Вернуться на сайт</a>
 </div>
 </body>
 </html>
