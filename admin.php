@@ -96,6 +96,18 @@ if (!$adminAuth) {
                 margin-bottom: 15px;
                 font-size: 14px;
             }
+            .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #2c5f2d;
+            text-decoration: none;
+            border-bottom: 1px dashed #2c5f2d;
+            }
+            .back-link:hover {
+                color: #1f4a20;
+                border-bottom-style: solid;
+            }
         </style>
     </head>
     <body>
@@ -111,6 +123,7 @@ if (!$adminAuth) {
                 <input type="password" name="auth_pass" required>
                 <button type="submit">Войти</button>
             </form>
+            <a href="/project" class="back-link">На главную</a>
         </div>
     </body>
     </html>
@@ -511,7 +524,7 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
                     <textarea name="biography" rows="5"><?= h($editData['biography']) ?></textarea>
                 </div>
                 <div class="field field-checkbox">
-                    <label><input type="checkbox" name="contract" value="1" <?= $editData['contract_accepted'] ? 'checked' : '' ?>> Контракт ознакомлен *</label>
+                    <label><input type="checkbox" name="contract" value="1" <?= $editData['contract_accepted'] ? 'checked' : '' ?>> С контрактом ознакомлен *</label>
                 </div>
                 <button type="submit">Сохранить изменения</button>
                 <a href="admin.php">Отмена</a>

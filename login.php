@@ -135,7 +135,7 @@ require_once 'config.php';
         <button type="submit">Войти</button>
         <input type="hidden" name="csrf_token" value="<?= generateCsrfToken() ?>">
     </form>
-    <a href="/project" class="back-link">← На главную</a>
+    <a href="/project" class="back-link">На главную</a>
 </div>
 </body>
 </html>
